@@ -39,7 +39,7 @@
             </div>
             <!-- FORM -->
             <div class="form-pengeluaran p-3 mb-5">
-                <form>
+                <form id="formPengeluaran">
                     <div class="mb-3">
                         <label for="jenis" class="form-label">Jenis Pengeluaran<span class="text-danger">*</span></label>
                         <div class="input-group">
@@ -181,6 +181,10 @@
                     text: "Data Pengeluaran berhasil dikirim.",
                     icon: "success",
                     button: true
+                }).then(() => {
+                    document.getElementById('formPengeluaran').reset(); // Reset form
+                    // Reset displayed file name
+                    document.getElementById('fileName').textContent = "Tidak ada file.";
                 });
             } else {
                 swal({
