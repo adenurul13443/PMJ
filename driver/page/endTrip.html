@@ -40,13 +40,14 @@
             </div>
             <!-- FORM INPUT -->
             <div class="form-km p-3 mb-5">
-                <form>
+                <form id="formEndTrip">
                     <div class="mb-3">
                         <label for="endTrip" class="form-label">Kilometer Akhir</label>
                         <div class="input-group">
                             <span class="input-group-text" id="icon"><i class="fa-solid fa-gauge"></i></span>                      
-                            <input type="text" class="form-control" id="endTrip" placeholder="Masukkan Kilometer Akhir" required>
+                            <input type="text" class="form-control" id="endTrip" placeholder="Masukkan Kilometer Akhir" required autofocus>
                         </div>
+                        <small class="text-danger" id="error" style="display: none;">Data harus diisi.</small>
                     </div>
                     <div class="mb-3">
                         <button type="button" class="btn-endtrip" onclick="submitEndTrip()">Kirim</button>
@@ -61,12 +62,37 @@
      <script>
         //SCRIPT ALERT
         function submitEndTrip() {
+            //Ambil nilai field
+            var endTrip = document.getElementById('endTrip').value;
+
+            //Validasi
+            var isValid = true;
+
+            // Pesan eror
+            document.getElementById('error').style.display = 'none';
+
+            // Validasi inputan
+            if (endTrip === "") {
+                document.getElementById('error').style.display = 'block';
+                isValid = false;
+            }
+            if(isValid){
             swal({
                 title: "Berhasil!",
-                text: "Perjalanan berhasil diakhiri.",
+                text: "Data berhasil dikirim.",
                 icon: "success",
                 button: true
+            }).then(()=>{
+                document.getElementById('formEndTrip').reset(); // Reset form
             });
+            }else{
+                swal({
+                    title: "Error!",
+                    text: "Data harus diisi!",
+                    icon: "error",
+                    button: true
+                });
+            }
         }
      </script>
    

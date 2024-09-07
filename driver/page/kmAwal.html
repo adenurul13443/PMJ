@@ -38,6 +38,7 @@
                             <span class="input-group-text" id="icon"><i class="fa-solid fa-gauge"></i></span>                      
                             <input type="text" class="form-control" id="kmAwal" placeholder="Masukkan Kilometer Awal" required autofocus>
                         </div>
+                        <small class="text-danger" id="error" style="display: none;">Masukkan data kilometer awal.</small>
                     </div>
                     <!-- BUTTON -->
                     <div class="mb-3">
@@ -53,12 +54,37 @@
      <script>
         //SCRIPT ALERT
         function submitKmAwal() {
+            //Ambil nilai field
+            var kmAwal = document.getElementById('kmAwal').value;
+
+            //Validasi
+            var isValid = true;
+
+            // Pesan eror
+            document.getElementById('error').style.display = 'none';
+
+            // Validasi inputan
+            if (kmAwal === "") {
+                document.getElementById('error').style.display = 'block';
+                isValid = false;
+            }
+            if(isValid){
             swal({
                 title: "Berhasil!",
                 text: "Data berhasil dikirim.",
                 icon: "success",
                 button: true
+            }).then(()=>{
+                window.location.href = "inputData.html";
             });
+            }else{
+                swal({
+                    title: "Error!",
+                    text: "Data harus diisi!",
+                    icon: "error",
+                    button: true
+                });
+            }
         }
      </script>
    
